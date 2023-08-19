@@ -1,0 +1,140 @@
+body {
+    background-color: rgb(27, 29, 29);
+    color: white;
+    font-family: sans-serif, 'Roboto';
+    padding-top: 50px;
+}
+
+.container {
+    max-width: 550px;
+    margin: auto;
+}
+
+a {
+    color: white
+}
+
+a:hover {
+    background-color: white;
+    color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+}
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    background-color: rgb(135, 74, 217);
+}
+
+.header-bar a {
+    text-decoration: none;
+}
+
+.task-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgb(38, 38, 38);
+    border-top: 1px solid white
+}
+
+.task-title {
+    display: flex;
+    align-items: center;
+}
+
+.task-title a {
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+
+}
+
+.task-complete-icon {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(105, 192, 105);
+    border-radius: 50%;
+    border-color: white;
+    border: 1px solid  white;
+    /* margin-top: -4px; */
+}
+
+.task-incomplete-icon {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid  white;
+}
+
+.delete-link {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 0;
+}
+
+.delete-link:hover {
+    color: #cf4949;
+}
+
+#search-add-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+#add-link {
+    color: white;
+    text-decoration: none;
+    font-size: 42px;
+    text-shadow: 1px 1px grey;
+}
+
+input[type=text], input[type=password], textarea {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+    background-color: rgb(38, 38, 38);
+    color: white;
+    font-family: monospace;
+}
+
+
+label {
+    padding: 10px !important;
+    display: block;
+}
+
+.button {
+    border: 1px solid white;
+    background-color: rgb(135, 74, 217);
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 1000px;
+}
+
+.button:hover {
+    background-color: white;
+    border-color: rgb(135, 74, 217);
+    color:  rgb(135, 74, 217);
+}
+
+.card-body {
+    padding: 20px;
+    background-color: rgb(38, 38, 38);
+}

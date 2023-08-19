@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-from .models import Task
+from .models import Task, Subject
 
 class CustomLoginView(LoginView):
     template_name = "base/login.html"
@@ -26,7 +26,7 @@ class RegisterPage(FormView):
     template_name = "base/register.html"
     form_class = UserCreationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('tasks')
+    success_url = reverse_lazy('setup')
 
     def form_valid(self, form: Any) -> HttpResponse:
         user = form.save()
@@ -39,6 +39,12 @@ class RegisterPage(FormView):
             return redirect('tasks')
         return super(RegisterPage, self).get(*args, **kwargs)
 
+class Setup(LoginRequiredMixin, FormView):
+    template_name = "base/setup.html"
+    model = Subject
+    fields = ['code']
+    success_url = reverse_lazy('tasks')
+
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = "tasks"
@@ -46,7 +52,7 @@ class TaskList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
-        context['count'] = context['tasks'].filter(complete=False)
+        context['count'] = context['tasks'].filter(complete=False).count()
         
         search_input = self.request.GET.get('search-area') or ''
         if search_input:
@@ -56,6 +62,16 @@ class TaskList(LoginRequiredMixin, ListView):
         
         return context
 
+class TaskGrid(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = "tasks"
+    template_name = 'base/task-grid.html'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+
+        return 
+    
 
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
@@ -80,3 +96,4 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
+
