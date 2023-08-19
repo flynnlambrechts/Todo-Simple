@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-from .models import Task, Subject
+from .models import Task
 
 class CustomLoginView(LoginView):
     template_name = "base/login.html"
@@ -39,11 +39,6 @@ class RegisterPage(FormView):
             return redirect('tasks')
         return super(RegisterPage, self).get(*args, **kwargs)
 
-class Setup(LoginRequiredMixin, FormView):
-    template_name = "base/setup.html"
-    model = Subject
-    fields = ['code']
-    success_url = reverse_lazy('tasks')
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -62,16 +57,6 @@ class TaskList(LoginRequiredMixin, ListView):
         
         return context
 
-class TaskGrid(LoginRequiredMixin, ListView):
-    model = Task
-    context_object_name = "tasks"
-    template_name = 'base/task-grid.html'
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-
-        return 
-    
 
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
@@ -86,6 +71,16 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
+
+class Setup(LoginRequiredMixin, FormView):
+    # model = Subject
+    # template_name = "base/setup.html"
+    # fields = ['code']
+    # success_url = reverse_lazy('tasks')
+    def get():
+
+        return HttpResponse("test")
+
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
